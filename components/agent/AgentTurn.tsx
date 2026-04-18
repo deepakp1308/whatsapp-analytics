@@ -1,8 +1,9 @@
 import type { AgentTurn as AgentTurnType } from "@/lib/types";
-import { Bot, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { EvidencePanel } from "@/components/rail/EvidencePanel";
 import { ActionComposer } from "@/components/rail/ActionComposer";
 import { Card } from "@/components/cards/Card";
+import { AgentLogo } from "./AgentLogo";
 
 /** Minimal markdown-ish renderer: bolds **text** and preserves line breaks. */
 function renderMarkdown(md: string) {
@@ -43,9 +44,7 @@ export function AgentTurn({ turn, onFollowUp }: Props) {
 
   return (
     <div className="flex items-start gap-3 mc-fade-in">
-      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[color:var(--mc-opportunity-bg)] text-[color:var(--mc-opportunity)]">
-        <Bot className="h-4 w-4" />
-      </span>
+      <AgentLogo size={32} />
       <div className="min-w-0 flex-1 space-y-3">
         <Card className="p-4">
           <div className="mb-2 flex items-center gap-2 text-[11px]">

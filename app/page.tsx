@@ -4,7 +4,6 @@ import { LayoutPreview, type PreviewVariant } from "@/components/gallery/LayoutP
 import {
   ArrowRight,
   BarChart3,
-  Bot,
   Columns3,
   LayoutDashboard,
   LayoutList,
@@ -12,6 +11,7 @@ import {
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
+import { AgentLogo } from "@/components/agent/AgentLogo";
 
 type Prototype = {
   num: string;
@@ -243,9 +243,7 @@ function InfoCard() {
   return (
     <div className="flex flex-col gap-4 rounded-[12px] border border-dashed border-[color:var(--mc-border-strong)] bg-[color:var(--mc-subtle)] p-6">
       <div className="flex items-center gap-2">
-        <span className="grid h-7 w-7 place-items-center rounded-full bg-[color:var(--mc-surface)] ring-1 ring-[color:var(--mc-border)]">
-          <Bot className="h-3.5 w-3.5 text-[color:var(--mc-opportunity)]" />
-        </span>
+        <AgentLogo size={28} />
         <h3 className="text-[15px] font-semibold text-[color:var(--mc-text-peppercorn)]">
           How the five prototypes relate
         </h3>

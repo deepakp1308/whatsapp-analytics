@@ -9,7 +9,8 @@ import {
 import type { AgentTurn as AgentTurnType } from "@/lib/types";
 import { agentScript } from "@/lib/mock/agent-script";
 import { AgentTurn } from "./AgentTurn";
-import { Bot, Send } from "lucide-react";
+import { Send } from "lucide-react";
+import { AgentLogo } from "./AgentLogo";
 import { Card } from "@/components/cards/Card";
 import { insights } from "@/lib/mock/insights";
 
@@ -111,10 +112,8 @@ export const ConversationCanvas = forwardRef<ConversationCanvasHandle, Props>(
     return (
       <Card className={`flex ${heightClass} flex-col`}>
         <div className="flex items-center justify-between border-b border-[color:var(--mc-border)] px-5 py-3">
-          <div className="flex items-center gap-2">
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-[color:var(--mc-opportunity-bg)]">
-              <Bot className="h-3.5 w-3.5 text-[color:var(--mc-opportunity)]" />
-            </span>
+          <div className="flex items-center gap-2.5">
+            <AgentLogo size={28} disc={false} />
             <div>
               <h3 className="text-[14px] font-semibold text-[color:var(--mc-text-peppercorn)]">
                 Analytics agent
@@ -140,9 +139,7 @@ export const ConversationCanvas = forwardRef<ConversationCanvasHandle, Props>(
           ))}
           {typing && (
             <div className="flex items-start gap-3">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[color:var(--mc-opportunity-bg)] text-[color:var(--mc-opportunity)]">
-                <Bot className="h-4 w-4" />
-              </span>
+              <AgentLogo size={32} />
               <div className="mc-typing rounded-2xl bg-[color:var(--mc-subtle)] px-4 py-3 text-[13px] text-[color:var(--mc-text-secondary)]">
                 Agent is thinking
               </div>
