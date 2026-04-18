@@ -1,16 +1,17 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /**
  * Agent mark used across every agent-mode surface: conversation avatars,
- * plan switcher, gallery, variant switcher. Wraps the Mailchimp agent PNG
- * in `/public/agent-logo.png` so Next.js handles basePath correctly in
- * the static export.
+ * plan switcher, gallery, variant switcher. Loads `public/agent-logo.png`.
  *
- * The image is rendered on a transparent disc so tiny sizes keep circular
- * contact against any background. For >=24px we skip the backdrop and
- * let the mark breathe.
+ * Note: Next.js 16 static export with `images.unoptimized: true` does NOT
+ * auto-prefix basePath onto next/image src. We bypass next/image and use a
+ * plain <img> with the basePath prefixed manually, so the file resolves
+ * correctly under /whatsapp-analytics/ on GitHub Pages and at `/` in dev.
  */
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const LOGO_SRC = `${BASE_PATH}/agent-logo.png`;
+
 type Props = {
   /** Pixel size. The component picks the right container so the mark
    *  always reads. */
@@ -38,8 +39,9 @@ export function AgentLogo({ size = 24, className, disc, alt = "Agent" }: Props) 
         aria-label={alt}
         role="img"
       >
-        <Image
-          src="/agent-logo.png"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={LOGO_SRC}
           alt=""
           width={artSize}
           height={artSize}
@@ -51,8 +53,9 @@ export function AgentLogo({ size = 24, className, disc, alt = "Agent" }: Props) 
   }
 
   return (
-    <Image
-      src="/agent-logo.png"
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={LOGO_SRC}
       alt={alt}
       width={artSize}
       height={artSize}
