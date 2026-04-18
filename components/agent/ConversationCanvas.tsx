@@ -9,8 +9,8 @@ import {
 import type { AgentTurn as AgentTurnType } from "@/lib/types";
 import { agentScript } from "@/lib/mock/agent-script";
 import { AgentTurn } from "./AgentTurn";
-import { Send } from "lucide-react";
 import { AgentLogo } from "./AgentLogo";
+import { AgentInputBar } from "./AgentInputBar";
 import { Card } from "@/components/cards/Card";
 import { insights } from "@/lib/mock/insights";
 
@@ -30,7 +30,6 @@ export const ConversationCanvas = forwardRef<ConversationCanvasHandle, Props>(
     const [visible, setVisible] = useState<AgentTurnType[]>([]);
     const [queue, setQueue] = useState<AgentTurnType[]>(agentScript);
     const [typing, setTyping] = useState(false);
-    const [input, setInput] = useState("");
     const endRef = useRef<HTMLDivElement>(null);
 
     // Keep the latest handler in a ref so the imperative handle is stable.
@@ -73,7 +72,6 @@ export const ConversationCanvas = forwardRef<ConversationCanvasHandle, Props>(
         content: text.trim(),
       };
       setVisible((v) => [...v, userTurn]);
-      setInput("");
 
       const match =
         (preferredInsightId && insights.find((i) => i.id === preferredInsightId)) ||
@@ -148,28 +146,12 @@ export const ConversationCanvas = forwardRef<ConversationCanvasHandle, Props>(
           <div ref={endRef} />
         </div>
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            submitUserMessage(input);
-          }}
-          className="flex items-center gap-2 border-t border-[color:var(--mc-border)] px-4 py-3"
-        >
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask the agent — try 'Show me why India is different'…"
-            className="h-9 flex-1 rounded-full border border-[color:var(--mc-border-strong)] bg-[color:var(--mc-subtle)] px-4 text-[13px] text-[color:var(--mc-text-primary)] focus:border-[color:var(--mc-link)] focus:outline-none"
-            aria-label="Ask the agent"
+        <div className="border-t border-[color:var(--mc-border)] bg-[color:var(--mc-surface)] px-5 pb-4 pt-3">
+          <AgentInputBar
+            onSubmit={(text) => submitUserMessage(text)}
+            placeholder="Ask anything — e.g. 'Show me why India is different'"
           />
-          <button
-            type="submit"
-            className="grid h-9 w-9 place-items-center rounded-full bg-[color:var(--mc-cta)] text-white hover:bg-[color:var(--mc-cta-hover)]"
-            aria-label="Send"
-          >
-            <Send className="h-4 w-4" />
-          </button>
-        </form>
+        </div>
       </Card>
     );
   }

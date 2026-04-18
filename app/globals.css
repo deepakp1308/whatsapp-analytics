@@ -177,3 +177,23 @@ button {
   to   { opacity: 1; transform: translateY(0); }
 }
 .mc-fade-in { animation: mcFadeIn 240ms ease-out both; }
+
+/* AI surface gradient — used on the agent input-bar border, AI banners,
+   and any other "intelligence" affordance. Stops are all Mailchimp chart
+   tokens so the brand reads clearly. */
+.mc-ai-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--mc-chart-1) 0%,      /* #2B77CC — primary blue */
+    var(--mc-chart-5) 40%,     /* #00B3C2 — cyan */
+    var(--mc-chart-8) 65%,     /* #017E89 — agave */
+    var(--mc-chart-2) 100%     /* #00892E — positive green */
+  );
+  background-size: 200% 100%;
+  animation: mcAiShimmer 10s ease-in-out infinite;
+}
+
+@keyframes mcAiShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
