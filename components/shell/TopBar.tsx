@@ -17,7 +17,7 @@ export function TopBar() {
           <input
             type="search"
             placeholder="Search Mailchimp"
-            className="h-9 w-full rounded-full border border-[color:var(--mc-border)] bg-[color:var(--mc-subtle)] pl-9 pr-4 text-[13px] text-[color:var(--mc-text-primary)] placeholder:text-[color:var(--mc-text-tertiary)] focus:border-[color:var(--mc-link)] focus:outline-none"
+            className="h-9 w-full rounded-md border border-[color:var(--mc-border-strong)] bg-[color:var(--mc-surface)] pl-9 pr-4 text-[13px] text-[color:var(--mc-text-primary)] placeholder:text-[color:var(--mc-text-tertiary)] focus:border-[color:var(--mc-link)] focus:outline-none"
             aria-label="Search Mailchimp"
           />
         </label>
