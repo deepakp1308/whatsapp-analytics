@@ -1,17 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { campaigns, getCampaign } from "@/lib/mock/campaigns";
-import { FilterBar } from "@/components/filters/FilterBar";
 import { PlanSwitcher } from "@/components/shell/PlanSwitcher";
-import { Button } from "@/components/ui/Button";
-import { AgentWorkspace } from "@/components/agent/AgentWorkspace";
 import { LayoutVariantSwitcher } from "@/components/agent/layouts/LayoutVariantSwitcher";
+import { SplitWorkspace } from "@/components/agent/layouts/split/SplitWorkspace";
+import { Button } from "@/components/ui/Button";
 
 export function generateStaticParams() {
   return campaigns.map((c) => ({ campaignId: c.id }));
 }
 
-export default async function AgentPage({
+export default async function AgentSplitPage({
   params,
 }: {
   params: Promise<{ campaignId: string }>;
@@ -21,7 +20,7 @@ export default async function AgentPage({
   if (!campaign) notFound();
 
   return (
-    <div className="px-6 pb-10 pt-5">
+    <div className="px-6 pb-4 pt-5">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <Link
@@ -30,10 +29,10 @@ export default async function AgentPage({
           >
             ← All campaigns
           </Link>
-          <h1 className="mc-h-page">WhatsApp report — Agent mode</h1>
+          <h1 className="mc-h-page">WhatsApp report — Agent · Split</h1>
         </div>
         <div className="flex items-center gap-3">
-          <LayoutVariantSwitcher campaignId={campaign.id} current="streamlined" />
+          <LayoutVariantSwitcher campaignId={campaign.id} current="split" />
           <PlanSwitcher campaignId={campaign.id} />
           <Button variant="secondary" size="sm">
             View campaign
@@ -41,9 +40,7 @@ export default async function AgentPage({
         </div>
       </div>
 
-      <FilterBar />
-
-      <AgentWorkspace campaignName={campaign.name} />
+      <SplitWorkspace campaignName={campaign.name} />
     </div>
   );
 }

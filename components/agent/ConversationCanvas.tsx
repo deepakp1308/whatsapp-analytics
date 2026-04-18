@@ -20,10 +20,12 @@ export type ConversationCanvasHandle = {
 
 type Props = {
   onInsightAnswered?: (insightId: string) => void;
+  /** Tailwind height class. Defaults to a fixed 560px. Pass `h-full` to fill parent. */
+  heightClass?: string;
 };
 
 export const ConversationCanvas = forwardRef<ConversationCanvasHandle, Props>(
-  function ConversationCanvas({ onInsightAnswered }, ref) {
+  function ConversationCanvas({ onInsightAnswered, heightClass = "h-[560px]" }, ref) {
     const [visible, setVisible] = useState<AgentTurnType[]>([]);
     const [queue, setQueue] = useState<AgentTurnType[]>(agentScript);
     const [typing, setTyping] = useState(false);
@@ -107,7 +109,7 @@ export const ConversationCanvas = forwardRef<ConversationCanvasHandle, Props>(
     );
 
     return (
-      <Card className="flex h-[560px] flex-col">
+      <Card className={`flex ${heightClass} flex-col`}>
         <div className="flex items-center justify-between border-b border-[color:var(--mc-border)] px-5 py-3">
           <div className="flex items-center gap-2">
             <span className="grid h-6 w-6 place-items-center rounded-full bg-[color:var(--mc-opportunity-bg)]">
