@@ -5,10 +5,13 @@ import {
   ArrowRight,
   BarChart3,
   Columns3,
+  FileText,
   LayoutDashboard,
   LayoutList,
   PanelRight,
+  ScanSearch,
   Sparkles,
+  Target,
   type LucideIcon,
 } from "lucide-react";
 import { AgentLogo } from "@/components/agent/AgentLogo";
@@ -154,6 +157,37 @@ export default function GalleryPage() {
         <InfoCard />
       </div>
 
+      {/* Executive docs */}
+      <section className="mt-14">
+        <div className="mb-5 flex items-baseline justify-between gap-3">
+          <div>
+            <div className="mc-micro mb-1 uppercase">Executive read</div>
+            <h2 className="mc-h-section">Strategy & positioning documents</h2>
+          </div>
+          <span className="mc-small">
+            Versioned alongside the prototypes · Generated 2026-04-18
+          </span>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <DocCard
+            Icon={Target}
+            href="/docs/executive-brief"
+            kicker="Exec brief · 1 page"
+            title="WhatsApp Advanced Analytics — Intelligence Domains"
+            description="Every metric mapped into seven Intelligence Domains, each tied to a marketer's job-to-be-done and the Monday-morning question it answers."
+            accent="var(--mc-opportunity)"
+          />
+          <DocCard
+            Icon={ScanSearch}
+            href="/docs/competitive-analysis"
+            kicker="Comp analysis · 5 vendors"
+            title="Mailchimp vs Meta, Klaviyo, ActiveCampaign, Braze, Infobip"
+            description="Domain-by-domain capability scorecard with per-vendor UX commentary, honest gaps, and positioning paragraphs for the deck."
+            accent="var(--mc-link)"
+          />
+        </div>
+      </section>
+
       <footer className="mt-12 border-t border-[color:var(--mc-border)] pt-6 text-[12px] text-[color:var(--mc-text-tertiary)]">
         Design tokens captured from the Figma file{" "}
         <code className="rounded bg-[color:var(--mc-subtle)] px-1 py-0.5 text-[11px] font-mono">
@@ -225,6 +259,59 @@ function PrototypeCard({ prototype: p }: { prototype: Prototype }) {
         >
           Open prototype
           <ArrowRight className="h-3 w-3" />
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+function DocCard({
+  Icon,
+  href,
+  kicker,
+  title,
+  description,
+  accent,
+}: {
+  Icon: LucideIcon;
+  href: string;
+  kicker: string;
+  title: string;
+  description: string;
+  accent: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group flex items-start gap-4 rounded-[12px] border border-[color:var(--mc-border)] bg-[color:var(--mc-surface)] p-5 transition-shadow hover:shadow-[var(--mc-shadow)]"
+      style={{ borderLeft: `3px solid ${accent}` }}
+    >
+      <span
+        className="grid h-9 w-9 shrink-0 place-items-center rounded-lg"
+        style={{ backgroundColor: `${accent}1A`, color: accent }}
+      >
+        <Icon className="h-4 w-4" />
+      </span>
+      <div className="flex-1">
+        <div
+          className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide"
+          style={{ color: accent }}
+        >
+          <FileText className="h-3 w-3" />
+          {kicker}
+        </div>
+        <h3 className="text-[15px] font-semibold leading-5 text-[color:var(--mc-text-peppercorn)]">
+          {title}
+        </h3>
+        <p className="mt-1.5 text-[12px] leading-[17px] text-[color:var(--mc-text-secondary)]">
+          {description}
+        </p>
+        <span
+          className="mt-2 inline-flex items-center gap-1 text-[12px] font-medium"
+          style={{ color: accent }}
+        >
+          Read document
+          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
         </span>
       </div>
     </Link>
