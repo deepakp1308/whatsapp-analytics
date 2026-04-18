@@ -1,5 +1,5 @@
 import type { FunnelStage } from "@/lib/types";
-import { mcSeverity } from "@/lib/tokens";
+import { mcChart, mcSeverity } from "@/lib/tokens";
 import { formatNumber } from "@/lib/utils";
 import { Card, CardHeader } from "./Card";
 
@@ -46,7 +46,7 @@ export function AdaptiveFunnel({ stages, title = "Adaptive funnel", subtitle }: 
                   className="h-6 rounded-[4px]"
                   style={{
                     width: `${widthPct}%`,
-                    backgroundColor: sev === "healthy" ? "#2B77CC" : sevColor.fg,
+                    backgroundColor: mcChart.severity[sev],
                     opacity: sev === "healthy" ? 1 : 0.9,
                   }}
                   aria-label={`${s.label}: ${formatNumber(s.value)}`}

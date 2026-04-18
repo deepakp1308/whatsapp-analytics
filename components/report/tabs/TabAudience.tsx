@@ -3,6 +3,7 @@ import { BarChart } from "@/components/charts/BarChart";
 import { RankedTable } from "@/components/tables/RankedTable";
 import { segments, geos } from "@/lib/mock/catalog";
 import { cn } from "@/lib/utils";
+import { mcColor, mcSeverity } from "@/lib/tokens";
 
 export function TabAudience() {
   return (
@@ -101,8 +102,16 @@ function Th({
 }
 
 function IdxCell({ value }: { value: number }) {
-  const tone = value >= 115 ? "#00892E" : value >= 90 ? "#5D686F" : value >= 70 ? "#A275FF" : "#B61A37";
-  const bg = value >= 115 ? "#DFF5E7" : value >= 90 ? "#F0F4F6" : value >= 70 ? "#EFE8FF" : "#FDE7EA";
+  // Map completion-index to the same severity scale the rest of the app uses.
+  // 115+ = healthy, 90-114 = neutral text on subtle bg, 70-89 = opportunity, < 70 = action-needed.
+  const { tone, bg } =
+    value >= 115
+      ? { tone: mcSeverity.healthy.fg, bg: mcSeverity.healthy.bg }
+      : value >= 90
+      ? { tone: mcColor.text.secondary, bg: mcColor.page }
+      : value >= 70
+      ? { tone: mcSeverity.opportunity.fg, bg: mcSeverity.opportunity.bg }
+      : { tone: mcSeverity["action-needed"].fg, bg: mcSeverity["action-needed"].bg };
   return (
     <td className="px-6 py-3 text-right">
       <span

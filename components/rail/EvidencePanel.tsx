@@ -13,6 +13,7 @@ import {
 } from "@/lib/mock/metrics";
 import { geos, flowSteps, segments } from "@/lib/mock/catalog";
 import { annotateFunnel } from "@/lib/semantic";
+import { mcChart, mcSeverity } from "@/lib/tokens";
 
 /**
  * Render an evidence chart referenced by an Insight.
@@ -70,7 +71,7 @@ function renderEvidence(e: EvidenceRef) {
                 date: p.date,
                 value: 96 - Math.min(4, i * 0.14),
               })),
-              color: "#B61A37",
+              color: mcChart.negative,
             },
           ]}
         />
@@ -80,12 +81,12 @@ function renderEvidence(e: EvidenceRef) {
         <TrendChart
           height={160}
           series={[
-            { id: "read", label: "Read rate", data: portfolioTrend.readRate, color: "#2B77CC" },
+            { id: "read", label: "Read rate", data: portfolioTrend.readRate, color: mcChart.primary },
             {
               id: "peer",
               label: "Peer",
               data: portfolioTrend.readRate.map((p) => ({ ...p, value: p.value * 0.88 })),
-              color: "#A275FF",
+              color: mcChart.comparison,
             },
           ]}
         />
@@ -104,7 +105,7 @@ function renderEvidence(e: EvidenceRef) {
       return (
         <TrendChart
           height={160}
-          series={[{ id: "reply", label: "Reply rate", data: replyRateTrend, color: "#00892E" }]}
+          series={[{ id: "reply", label: "Reply rate", data: replyRateTrend, color: mcChart.secondary }]}
         />
       );
     case "ev_intent":
@@ -127,7 +128,7 @@ function renderEvidence(e: EvidenceRef) {
               id: "handoff",
               label: "Handoff rate",
               data: replyRateTrend.map((p) => ({ ...p, value: p.value * 0.7 })),
-              color: "#A275FF",
+              color: mcChart.comparison,
             },
           ]}
         />
@@ -155,7 +156,7 @@ function renderEvidence(e: EvidenceRef) {
       return (
         <TrendChart
           height={160}
-          series={[{ id: "rev", label: "Revenue", data: portfolioTrend.revenue, color: "#2B77CC" }]}
+          series={[{ id: "rev", label: "Revenue", data: portfolioTrend.revenue, color: mcChart.primary }]}
           yFormatter={(v) => `$${v}`}
         />
       );
@@ -192,9 +193,9 @@ function renderEvidence(e: EvidenceRef) {
           data={optOutByFreq}
           xKey="bucket"
           bars={[
-            { id: "email", label: "Email", color: "#A275FF" },
-            { id: "wa", label: "WA", color: "#2B77CC" },
-            { id: "sms", label: "SMS", color: "#00B3C2" },
+            { id: "email", label: "Email", color: mcChart.channel.email },
+            { id: "wa", label: "WA", color: mcChart.channel.whatsapp },
+            { id: "sms", label: "SMS", color: mcChart.channel.sms },
           ]}
           height={180}
         />
@@ -222,7 +223,7 @@ function renderEvidence(e: EvidenceRef) {
         <TrendChart
           height={160}
           series={[
-            { id: "v", label: e.title, data: portfolioTrend.revenue.slice(-20), color: "#2B77CC" },
+            { id: "v", label: e.title, data: portfolioTrend.revenue.slice(-20), color: mcChart.primary },
           ]}
         />
       );
@@ -238,12 +239,7 @@ function Scorecard({
   value: string;
   tone: "healthy" | "opportunity" | "watch" | "action-needed";
 }) {
-  const colors = {
-    healthy: { bg: "#DFF5E7", fg: "#00892E" },
-    opportunity: { bg: "#EFE8FF", fg: "#A275FF" },
-    watch: { bg: "#E0EDFF", fg: "#2B77CC" },
-    "action-needed": { bg: "#FDE7EA", fg: "#B61A37" },
-  }[tone];
+  const colors = { bg: mcSeverity[tone].bg, fg: mcSeverity[tone].fg };
   return (
     <div
       className="rounded-md p-2"

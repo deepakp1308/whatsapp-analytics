@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { insights } from "@/lib/mock/insights";
 import type { Insight } from "@/lib/types";
 import type { Severity } from "@/lib/tokens";
+import { mcChart } from "@/lib/tokens";
 import { Card } from "@/components/cards/Card";
 
 export type AgentChip = {
@@ -158,11 +159,10 @@ export function AgentChipExplorer({ answeredInsightIds, onPick, highlightTab }: 
 }
 
 function SeverityDot({ severity }: { severity: Severity }) {
-  const color = {
-    healthy: "#00892E",
-    watch: "#2B77CC",
-    opportunity: "#A275FF",
-    "action-needed": "#B61A37",
-  }[severity];
-  return <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: color }} />;
+  return (
+    <span
+      className="h-1.5 w-1.5 shrink-0 rounded-full"
+      style={{ backgroundColor: mcChart.severity[severity] }}
+    />
+  );
 }

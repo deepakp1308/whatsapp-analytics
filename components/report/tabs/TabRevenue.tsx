@@ -4,6 +4,7 @@ import { BarChart } from "@/components/charts/BarChart";
 import { RankedTable } from "@/components/tables/RankedTable";
 import { portfolioTrend, revenueSplit, revenueBySegment } from "@/lib/mock/metrics";
 import { formatCurrency } from "@/lib/utils";
+import { mcChart } from "@/lib/tokens";
 
 export function TabRevenue() {
   return (
@@ -20,7 +21,7 @@ export function TabRevenue() {
                     id: "revenue",
                     label: "Revenue",
                     data: portfolioTrend.revenue,
-                    color: "#2B77CC",
+                    color: mcChart.primary,
                   },
                 ]}
                 yFormatter={(v) => `$${v}`}
@@ -32,11 +33,11 @@ export function TabRevenue() {
         <Card>
           <CardHeader title="New vs returning" subtitle="Revenue contribution" />
           <div className="space-y-3 px-6 pb-6">
-            <Row label="New customers" value={revenueSplit.newCustomers} total={revenueSplit.newCustomers + revenueSplit.repeatCustomers} color="#A275FF" />
-            <Row label="Repeat customers" value={revenueSplit.repeatCustomers} total={revenueSplit.newCustomers + revenueSplit.repeatCustomers} color="#2B77CC" />
+            <Row label="New customers" value={revenueSplit.newCustomers} total={revenueSplit.newCustomers + revenueSplit.repeatCustomers} color={mcChart.comparison} />
+            <Row label="Repeat customers" value={revenueSplit.repeatCustomers} total={revenueSplit.newCustomers + revenueSplit.repeatCustomers} color={mcChart.primary} />
             <div className="mt-4 border-t border-[color:var(--mc-border)] pt-3">
-              <Row label="Direct" value={revenueSplit.direct} total={revenueSplit.direct + revenueSplit.assisted} color="#00892E" />
-              <Row label="Assisted" value={revenueSplit.assisted} total={revenueSplit.direct + revenueSplit.assisted} color="#00B3C2" />
+              <Row label="Direct" value={revenueSplit.direct} total={revenueSplit.direct + revenueSplit.assisted} color={mcChart.secondary} />
+              <Row label="Assisted" value={revenueSplit.assisted} total={revenueSplit.direct + revenueSplit.assisted} color={mcChart.tertiary} />
             </div>
           </div>
         </Card>

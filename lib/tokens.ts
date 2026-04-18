@@ -78,3 +78,43 @@ export const mcSeverity = {
 } as const;
 
 export type Severity = keyof typeof mcSeverity;
+
+/**
+ * Semantic chart roles. All charts, funnels, sparklines, and dots should
+ * reference these names instead of hex literals so palette tweaks are a
+ * one-file change. Every value is derived from `mcColor` above.
+ */
+export const mcChart = {
+  // Series roles, in the order they should be picked for single-line / bar charts
+  primary: mcColor.chart[0],        // #2B77CC — Mailchimp blue
+  secondary: mcColor.chart[1],      // #00892E — positive green (also used as "conversions" overlay)
+  comparison: mcColor.chart[2],     // #A275FF — purple for peer / benchmark comparison
+  tertiary: mcColor.chart[4],       // #00B3C2 — cyan accent (SMS, assisted)
+  quaternary: mcColor.chart[7],     // #017E89 — agave
+  accent: mcColor.chart[3],         // #D72792 — magenta accent
+
+  // Semantic roles
+  positive: mcColor.positive.fg,    // #00892E
+  negative: mcColor.negative.fg,    // #B61A37
+  neutral: mcColor.border.DEFAULT,  // #E2E9ED (inactive bar, "Free" traffic)
+  subtle: mcColor.subtle,           // #F8FAFB (chart backdrop)
+
+  /** Channel-specific colors for cross-channel comparisons. */
+  channel: {
+    whatsapp: mcColor.chart[0],     // #2B77CC
+    email: mcColor.chart[2],        // #A275FF
+    sms: mcColor.chart[4],          // #00B3C2
+  },
+
+  /** Severity-to-bar colour map for funnels & data bars. */
+  severity: {
+    healthy: mcColor.chart[0],               // blue for healthy bars
+    watch: mcColor.attention.fg,             // #2B77CC
+    opportunity: mcColor.opportunity.fg,     // #A275FF
+    "action-needed": mcColor.negative.fg,    // #B61A37
+  } satisfies Record<Severity, string>,
+
+  /** Full categorical palette for when more than 3 series are needed. */
+  palette: mcColor.chart,
+} as const;
+

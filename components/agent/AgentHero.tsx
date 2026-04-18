@@ -4,7 +4,7 @@ import { Card } from "@/components/cards/Card";
 import { SeverityBadge } from "@/components/cards/SeverityBadge";
 import { Bell, X, ArrowUpRight, ArrowDownRight, Target, Sparkles } from "lucide-react";
 import type { Severity } from "@/lib/tokens";
-import { mcSeverity } from "@/lib/tokens";
+import { mcChart } from "@/lib/tokens";
 import { funnel } from "@/lib/mock/metrics";
 import { cn, formatNumber } from "@/lib/utils";
 
@@ -161,7 +161,7 @@ function CompactFunnel() {
         const drop =
           s.previous !== undefined ? ((s.previous - s.value) / s.previous) * 100 : 0;
         const sev = s.severity ?? "healthy";
-        const fill = sev === "healthy" ? "#2B77CC" : mcSeverity[sev].fg;
+        const fill = mcChart.severity[sev];
         return (
           <div
             key={s.id}

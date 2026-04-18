@@ -8,7 +8,7 @@ const toneClass: Record<Tone, string> = {
   attention:
     "bg-[color:var(--mc-attention-bg)] text-[color:var(--mc-attention)]",
   warning:
-    "bg-[color:var(--mc-warning-bg)] text-[#8A6D00]",
+    "bg-[color:var(--mc-warning-bg)] text-[color:var(--mc-warning-fg)]",
   negative:
     "bg-[color:var(--mc-negative-bg)] text-[color:var(--mc-negative)]",
   opportunity:

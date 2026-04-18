@@ -11,6 +11,7 @@ import { campaigns } from "@/lib/mock/campaigns";
 import { Button } from "@/components/ui/Button";
 import { RankedTable } from "@/components/tables/RankedTable";
 import { formatCurrency } from "@/lib/utils";
+import { mcChart } from "@/lib/tokens";
 
 export default function DashboardPage() {
   const win = insights.find((i) => i.id === "ins_biggest_win")!;
@@ -41,10 +42,18 @@ export default function DashboardPage() {
               action={
                 <div className="flex items-center gap-2 text-[11px] text-[color:var(--mc-text-secondary)]">
                   <span className="inline-flex items-center gap-1">
-                    <span className="h-2 w-2 rounded-full bg-[#2B77CC]" /> Revenue
+                    <span
+                      className="h-2 w-2 rounded-full"
+                      style={{ backgroundColor: mcChart.primary }}
+                    />{" "}
+                    Revenue
                   </span>
                   <span className="inline-flex items-center gap-1">
-                    <span className="h-2 w-2 rounded-full bg-[#00892E]" /> Conversions
+                    <span
+                      className="h-2 w-2 rounded-full"
+                      style={{ backgroundColor: mcChart.secondary }}
+                    />{" "}
+                    Conversions
                   </span>
                 </div>
               }
@@ -53,8 +62,8 @@ export default function DashboardPage() {
               <TrendChart
                 height={240}
                 series={[
-                  { id: "revenue", label: "Revenue", data: portfolioTrend.revenue, color: "#2B77CC" },
-                  { id: "conversions", label: "Conversions", data: portfolioTrend.conversions, color: "#00892E" },
+                  { id: "revenue", label: "Revenue", data: portfolioTrend.revenue, color: mcChart.primary },
+                  { id: "conversions", label: "Conversions", data: portfolioTrend.conversions, color: mcChart.secondary },
                 ]}
               />
             </div>

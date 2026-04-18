@@ -1,7 +1,7 @@
 "use client";
 import { Target, ArrowUpRight, ArrowDownRight, Bell, X } from "lucide-react";
 import type { Severity } from "@/lib/tokens";
-import { mcSeverity } from "@/lib/tokens";
+import { mcChart } from "@/lib/tokens";
 import { funnel } from "@/lib/mock/metrics";
 import { cn, formatNumber } from "@/lib/utils";
 import { useState } from "react";
@@ -115,7 +115,7 @@ export function SplitHeroStrip({ objective, onAlertAction, alertMessage }: Props
             {funnel.map((s) => {
               const pct = (s.value / funnel[0].value) * 100;
               const sev = s.severity ?? "healthy";
-              const fill = sev === "healthy" ? "#2B77CC" : mcSeverity[sev].fg;
+              const fill = mcChart.severity[sev];
               return (
                 <div
                   key={s.id}

@@ -44,7 +44,7 @@
   --mc-attention-bg: #E0EDFF;
   --mc-opportunity: #A275FF;
   --mc-opportunity-bg: #EFE8FF;
-  --mc-warning: #FFE01B;
+  --mc-warning-fg: #8A6D00;
   --mc-warning-bg: #FFF4D6;
 
   /* Data viz categories */
@@ -99,6 +99,16 @@
   --color-mc-opportunity: var(--mc-opportunity);
   --color-mc-opportunity-bg: var(--mc-opportunity-bg);
   --color-mc-warning-bg: var(--mc-warning-bg);
+  --color-mc-warning-fg: var(--mc-warning-fg);
+
+  /* Expose the chart palette as Tailwind-addressable utilities
+     (e.g. bg-mc-chart-primary, text-mc-chart-negative). */
+  --color-mc-chart-primary: var(--mc-chart-1);
+  --color-mc-chart-secondary: var(--mc-chart-2);
+  --color-mc-chart-comparison: var(--mc-chart-3);
+  --color-mc-chart-accent: var(--mc-chart-4);
+  --color-mc-chart-tertiary: var(--mc-chart-5);
+  --color-mc-chart-quaternary: var(--mc-chart-8);
 
   --radius-sm: 4px;
   --radius-md: 8px;

@@ -5,6 +5,7 @@ import { RankedTable } from "@/components/tables/RankedTable";
 import { campaignLeaderboard, portfolioTrend } from "@/lib/mock/metrics";
 import { templates } from "@/lib/mock/catalog";
 import { formatCurrency, formatNumber } from "@/lib/utils";
+import { mcChart } from "@/lib/tokens";
 
 export function TabCampaignPerformance() {
   return (
@@ -19,12 +20,12 @@ export function TabCampaignPerformance() {
             <TrendChart
               height={260}
               series={[
-                { id: "revenue", label: "This campaign", data: portfolioTrend.revenue, color: "#2B77CC" },
+                { id: "revenue", label: "This campaign", data: portfolioTrend.revenue, color: mcChart.primary },
                 {
                   id: "peer",
                   label: "Peer cohort",
                   data: portfolioTrend.revenue.map((p) => ({ ...p, value: p.value * 0.82 })),
-                  color: "#A275FF",
+                  color: mcChart.comparison,
                 },
               ]}
             />

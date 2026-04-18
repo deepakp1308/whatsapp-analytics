@@ -5,6 +5,7 @@ import { InsightCard } from "@/components/cards/InsightCard";
 import { TrendChart } from "@/components/charts/TrendChart";
 import { portfolioTrend, funnel, repliesTable } from "@/lib/mock/metrics";
 import { insights } from "@/lib/mock/insights";
+import { mcChart } from "@/lib/tokens";
 import { Button } from "@/components/ui/Button";
 import { RankedTable } from "@/components/tables/RankedTable";
 import { formatNumber } from "@/lib/utils";
@@ -37,21 +38,29 @@ export function TabOverview() {
             <div className="flex h-6 w-full overflow-hidden rounded">
               <div
                 className="h-full"
-                style={{ width: "72%", backgroundColor: "#2B77CC" }}
+                style={{ width: "72%", backgroundColor: mcChart.primary }}
                 aria-label="Paid 72%"
               />
               <div
                 className="h-full"
-                style={{ width: "28%", backgroundColor: "#E2E9ED" }}
+                style={{ width: "28%", backgroundColor: mcChart.neutral }}
                 aria-label="Free 28%"
               />
             </div>
             <div className="mt-2 flex items-center gap-4 text-[11px] text-[color:var(--mc-text-secondary)]">
               <span className="inline-flex items-center gap-1">
-                <span className="h-2 w-2 rounded bg-[#2B77CC]" /> Paid (2,890)
+                <span
+                  className="h-2 w-2 rounded"
+                  style={{ backgroundColor: mcChart.primary }}
+                />{" "}
+                Paid (2,890)
               </span>
               <span className="inline-flex items-center gap-1">
-                <span className="h-2 w-2 rounded bg-[#E2E9ED]" /> Free (719)
+                <span
+                  className="h-2 w-2 rounded"
+                  style={{ backgroundColor: mcChart.neutral }}
+                />{" "}
+                Free (719)
               </span>
             </div>
           </div>
@@ -106,8 +115,8 @@ export function TabOverview() {
             <TrendChart
               height={260}
               series={[
-                { id: "revenue", label: "Revenue", data: portfolioTrend.revenue, color: "#2B77CC" },
-                { id: "conversions", label: "Conversions", data: portfolioTrend.conversions, color: "#00892E" },
+                { id: "revenue", label: "Revenue", data: portfolioTrend.revenue, color: mcChart.primary },
+                { id: "conversions", label: "Conversions", data: portfolioTrend.conversions, color: mcChart.secondary },
               ]}
             />
           </div>
@@ -120,7 +129,7 @@ export function TabOverview() {
         <InsightCard insight={seqRec} label="Best next action" />
       </div>
 
-      <Card className="flex items-center gap-3 border-l-4 border-l-[color:var(--mc-warning)] bg-[color:var(--mc-warning-bg)]/50 p-4">
+      <Card className="flex items-center gap-3 border-l-4 border-l-[color:var(--mc-yellow)] bg-[color:var(--mc-warning-bg)]/50 p-4">
         <span className="text-lg">💡</span>
         <div className="mc-body flex-1">
           WhatsApp recipients responded to several recently offered customer satisfaction

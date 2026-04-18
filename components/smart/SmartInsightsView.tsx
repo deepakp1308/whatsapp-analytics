@@ -11,6 +11,7 @@ import { insights } from "@/lib/mock/insights";
 import { funnel, portfolioTrend } from "@/lib/mock/metrics";
 import { InsightCard } from "@/components/cards/InsightCard";
 import type { Insight } from "@/lib/types";
+import { mcChart } from "@/lib/tokens";
 
 const CHIP_GROUPS: {
   title: string;
@@ -52,8 +53,8 @@ export function SmartInsightsView({ campaignId }: { campaignId: string }) {
             <TrendChart
               height={240}
               series={[
-                { id: "revenue", label: "Revenue", data: portfolioTrend.revenue, color: "#2B77CC" },
-                { id: "conversions", label: "Conversions", data: portfolioTrend.conversions, color: "#00892E" },
+                { id: "revenue", label: "Revenue", data: portfolioTrend.revenue, color: mcChart.primary },
+                { id: "conversions", label: "Conversions", data: portfolioTrend.conversions, color: mcChart.secondary },
               ]}
             />
           </div>

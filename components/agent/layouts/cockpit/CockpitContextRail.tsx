@@ -1,7 +1,7 @@
 import { Target, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { SeverityBadge } from "@/components/cards/SeverityBadge";
 import type { Severity } from "@/lib/tokens";
-import { mcSeverity } from "@/lib/tokens";
+import { mcChart } from "@/lib/tokens";
 import { funnel } from "@/lib/mock/metrics";
 import { cn, formatNumber } from "@/lib/utils";
 
@@ -100,7 +100,7 @@ export function CockpitContextRail({ objective, narrative }: Props) {
           {funnel.map((s) => {
             const pct = (s.value / funnel[0].value) * 100;
             const sev = s.severity ?? "healthy";
-            const fill = sev === "healthy" ? "#2B77CC" : mcSeverity[sev].fg;
+            const fill = mcChart.severity[sev];
             const drop =
               s.previous !== undefined ? ((s.previous - s.value) / s.previous) * 100 : 0;
             return (

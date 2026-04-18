@@ -5,6 +5,7 @@ import { sequencePaths } from "@/lib/mock/catalog";
 import { optOutByFreq } from "@/lib/mock/metrics";
 import { formatCurrency } from "@/lib/utils";
 import { SeverityBadge } from "@/components/cards/SeverityBadge";
+import { mcChart } from "@/lib/tokens";
 
 export function TabCrossChannel() {
   return (
@@ -36,9 +37,9 @@ export function TabCrossChannel() {
               data={optOutByFreq}
               xKey="bucket"
               bars={[
-                { id: "email", label: "Email", color: "#A275FF" },
-                { id: "sms", label: "SMS", color: "#00B3C2" },
-                { id: "wa", label: "WhatsApp", color: "#2B77CC" },
+                { id: "email", label: "Email", color: mcChart.channel.email },
+                { id: "sms", label: "SMS", color: mcChart.channel.sms },
+                { id: "wa", label: "WhatsApp", color: mcChart.channel.whatsapp },
               ]}
               height={240}
             />
